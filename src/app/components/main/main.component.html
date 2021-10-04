@@ -1,10 +1,10 @@
 <div class="main-container">
   <div class="button-container">
-    <button mat-raised-button (click)="addNewOwner()">Add</button>
+    <button mat-raised-button (click)="addNewOwner($event)">Add</button>
     <div class="work-with-button">
       <button mat-raised-button (click)="actionWithOwner('show')">Show</button>
       <button mat-raised-button (click)="actionWithOwner('edit')">Edit</button>
-      <button mat-raised-button (click)="removeOwner()">Remove</button>
+      <button mat-raised-button (click)="removeOwner($event)">Remove</button>
     </div>
   </div>
 

@@ -1,10 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ICarOwnerServiceService } from '../../services';
-import { Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
-import { actions } from '../../store/owners';
-import { getOwners } from '../../store/owners/selectors';
-import { OwnerModel } from '../../models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 
 @Component({
@@ -14,65 +8,29 @@ import { OwnerModel } from '../../models';
 })
 export class MainComponent implements OnInit {
 
-  public data: any
-  public id?: string
+  @Input() data: any
+  @Output() addNewOwnerEvent = new EventEmitter()
+  @Output() actionsEvent = new EventEmitter()
+  @Output() idEvent = new EventEmitter()
+  @Output() removeEvent = new EventEmitter()
 
-  constructor(
-    public helper: ICarOwnerServiceService,
-    private router: Router,
-    private store$: Store
-  ) { }
+  constructor() { }
 
-  ngOnInit(): void {
-
-    this.store$.dispatch(actions.loadOwners())
-
-    this.store$.pipe(select(getOwners))
-      .subscribe((value:any) => {
-        this.data = value.items
-      })
-  }
+  ngOnInit(): void {}
 
   sendId(id: string) {
-    this.id = id
+    this.idEvent.emit(id)
   }
 
-  addNewOwner() {
-
-    const newOwner: OwnerModel = this.helper.createOwner('',
-      '','',
-      {
-        id: Date.now().toString(),
-        govNum: '',
-        carBrand: '',
-        carModel: '',
-        prodYear: ''
-      })
-
-    this.store$.dispatch(actions.addOwner({owner: newOwner}))
-
+  addNewOwner($event: any) {
+    this.addNewOwnerEvent.emit($event)
   }
 
   actionWithOwner(action: string) {
-    if (this.id) {
-      switch (action) {
-
-        case 'show':
-          this.router.navigate([`show/${this.id}`])
-          break;
-
-        case 'edit':
-          this.router.navigate([`edit/${this.id}`])
-          break;
-
-        default:
-          null
-          break;
-      }
-    }
+    this.actionsEvent.emit(action)
   }
 
-  removeOwner() {
-    this.store$.dispatch(actions.removeOwner({id: this.id!}))
+  removeOwner($event: any) {
+    this.removeEvent.emit($event)
   }
 }

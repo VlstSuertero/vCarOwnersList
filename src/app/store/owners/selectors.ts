@@ -10,8 +10,8 @@ export const getOwners = createSelector(
     return elem
   }
 );
-export const getOwnerById = (id: string) => createSelector(
-  ownersSelectors,
-  (elem: any): any => elem.filter((item: any) => item.id === id)[0]
-);
+// export const getOwnerById = (id: string) => createSelector(
+//   ownersSelectors,
+//   (elem: any): any => elem.filter((item: any) => item.id === id)[0]
+// );
 

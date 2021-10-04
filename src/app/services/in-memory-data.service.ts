@@ -13,8 +13,8 @@ export class InMemoryDataService implements InMemoryDbService{
       owners: [
         {
           id: '1',
-          firstName: 'Overlord',
-          middleName: 'Of Peace',
+          firstName: 'Robert',
+          middleName: 'Vital',
           lastName: 'Stephenson',
           cars: [
             {
