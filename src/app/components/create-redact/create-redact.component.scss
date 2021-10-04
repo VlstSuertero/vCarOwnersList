@@ -1,0 +1,51 @@
+.disabled {
+  pointer-events: none;
+
+  button {
+    display: none;
+  }
+}
+.redact-owner-container {
+
+  margin: 10px;
+
+  .redact-name-field {
+    display: flex;
+    justify-content: space-between;
+    width: 30%;
+    height: 40px;
+    align-items: center;
+
+    p {
+      margin: 0 10px;
+    }
+
+    input {
+      height: 20px;
+      width: 75%;
+      margin: 5px;
+      padding: 5px;
+      font-size: medium;
+    }
+  }
+}
+button {
+  background: gray;
+  margin: 10px;
+}
+
+.redact-car-container {
+  margin: 10px;
+
+  input {
+    height: 20px;
+    width: 75%;
+    margin: 5px;
+    padding: 5px;
+    font-size: medium;
+  }
+}
+
+.change-buttons {
+  margin: 0 10px;
+}

@@ -4,13 +4,59 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import {InMemoryWebApiModule} from 'angular-in-memory-web-api'
+import {InMemoryDataService} from './services'
+
+
+
+import { CreateRedactComponent, MainComponent } from './components';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+
+import { effects } from './store/effects';
+import { reducers } from './store/reducers';
+
+
+
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent,
+    CreateRedactComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+
+    MatInputModule,
+    MatButtonModule,
+
+    InMemoryWebApiModule.forRoot(InMemoryDataService, {apiBase: ''}),
+
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+      },
+    }),
+    EffectsModule.forRoot(effects),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

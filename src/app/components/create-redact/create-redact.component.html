@@ -1,0 +1,73 @@
+<div class="create-table-container"
+     [ngClass]="{'disabled': action === 'show'}"
+     [formGroup]="ownerForm"
+     (ngSubmit)="show()"
+>
+
+  <form action="" class="owner-form">
+
+    <div class="redact-owner-container" >
+
+      <div class="redact-name-field">
+        <p>Last Name: </p>
+        <input matInput type="text" value="{{owner.lastName}}" formControlName="lastName">
+      </div>
+
+      <div class="redact-name-field">
+        <p>First Name: </p>
+        <input type="text" value="{{owner.firstName}}" formControlName="firstName">
+      </div>
+
+      <div class="redact-name-field">
+        <p>Middle Name: </p>
+        <input type="text" value="{{owner.middleName}}" formControlName="middleName">
+      </div>
+
+    </div>
+
+    <div class="redact-car-container"
+         formArrayName="cars"
+    >
+      <tr>
+        <th><p>Number</p></th>
+        <th><p>Brand</p></th>
+        <th><p>Model</p></th>
+        <th><p>Year</p></th>
+      </tr>
+
+
+      <tr *ngFor="let car of owner.cars; let i = index">
+
+        <ng-container [formGroupName]="i">
+
+        <th>
+          <input type="text" value="{{car.govNum}}" formControlName="govNum">
+        </th>
+        <th>
+          <input type="text" value="{{car.carBrand}}" formControlName="carBrand">
+        </th>
+        <th>
+          <input type="text" value="{{car.carModel}}" formControlName="carModel">
+        </th>
+        <th>
+          <input type="text" value="{{car.prodYear}}" formControlName="prodYear">
+        </th>
+
+        <button type="button" mat-raised-button (click)="removeCar(car.id)">X</button>
+
+        </ng-container>
+
+      </tr>
+
+      <button type="button" mat-raised-button (click)="addNewCar()">Add New Car</button>
+
+    </div>
+
+    <div class="change-buttons">
+
+      <button type="button" mat-raised-button (click)="editOwner()">Save</button>
+      <button type="button" routerLink="" mat-raised-button>Back</button>
+
+    </div>
+  </form>
+</div>

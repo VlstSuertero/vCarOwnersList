@@ -1,0 +1,32 @@
+<div class="main-container">
+  <div class="button-container">
+    <button mat-raised-button (click)="addNewOwner()">Add</button>
+    <div class="work-with-button">
+      <button mat-raised-button (click)="actionWithOwner('show')">Show</button>
+      <button mat-raised-button (click)="actionWithOwner('edit')">Edit</button>
+      <button mat-raised-button (click)="removeOwner()">Remove</button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table>
+      <tr class="table-titles">
+        <td><p>Last Name:</p></td>
+        <td><p>First Name:</p></td>
+        <td><p>Middle Name:</p></td>
+        <td><p>Cars</p></td>
+      </tr>
+
+      <tr
+        class="table-info"
+        *ngFor="let elem of data;"
+          (click)="sendId(elem.id)"
+      >
+        <td><p>{{elem.lastName}}</p></td>
+        <td><p>{{elem.firstName}}</p></td>
+        <td><p>{{elem.middleName}}</p></td>
+        <td><p>{{elem.cars.length}}</p></td>
+      </tr>
+    </table>
+  </div>
+</div>
